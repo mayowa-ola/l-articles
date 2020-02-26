@@ -76,21 +76,20 @@ export default {
         },
         deleteArticle(id){
             if(confirm('Are You Sure')){
-                fetch(`api/articles/${id}`, {
+                fetch(`api/article/${id}`, {
                     method: 'delete'
                 })
-                .then(res => res.text())
-                // .then(data => {
-                //     alert('Article deleted');
-                //     this.fetchArticles();
-                // })
-                .then(text =>console.log(text))
+                .then(res => res.json())
+                .then(data => {
+                    alert('Article deleted');
+                    this.fetchArticles();
+                })
                 .catch(err =>console.log(err));
             }
         },
         addArticle(){
             if(this.edit === false) {
-                fetch(`api/articles`, {
+                fetch(`api/article`, {
                     method: 'post',
                     body: JSON.stringify(this.article),
                     headers: {
@@ -107,7 +106,7 @@ export default {
                 .catch(err =>console.log())
              }
              else   {
-                 fetch(`api/articles`, {
+                 fetch(`api/article`, {
                     method: 'put',
                     body: JSON.stringify(this.article),
                     headers: {

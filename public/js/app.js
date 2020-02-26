@@ -45180,28 +45180,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.pagination = pagination;
         },
         deleteArticle: function deleteArticle(id) {
+            var _this2 = this;
+
             if (confirm('Are You Sure')) {
-                fetch('api/articles/' + id, {
+                fetch('api/article/' + id, {
                     method: 'delete'
                 }).then(function (res) {
-                    return res.text();
-                })
-                // .then(data => {
-                //     alert('Article deleted');
-                //     this.fetchArticles();
-                // })
-                .then(function (text) {
-                    return console.log(text);
+                    return res.json();
+                }).then(function (data) {
+                    alert('Article deleted');
+                    _this2.fetchArticles();
                 }).catch(function (err) {
                     return console.log(err);
                 });
             }
         },
         addArticle: function addArticle() {
-            var _this2 = this;
+            var _this3 = this;
 
             if (this.edit === false) {
-                fetch('api/articles', {
+                fetch('api/article', {
                     method: 'post',
                     body: JSON.stringify(this.article),
                     headers: {
@@ -45210,15 +45208,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }).then(function (res) {
                     return res.json();
                 }).then(function (data) {
-                    _this2.article.title = '';
-                    _this2.article.body = '';
+                    _this3.article.title = '';
+                    _this3.article.body = '';
                     alert('Article Added');
-                    _this2.fetchArticles();
+                    _this3.fetchArticles();
                 }).catch(function (err) {
                     return console.log();
                 });
             } else {
-                fetch('api/articles', {
+                fetch('api/article', {
                     method: 'put',
                     body: JSON.stringify(this.article),
                     headers: {
@@ -45227,10 +45225,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }).then(function (res) {
                     return res.json();
                 }).then(function (data) {
-                    _this2.article.title = '';
-                    _this2.article.body = '';
+                    _this3.article.title = '';
+                    _this3.article.body = '';
                     alert('Article Updated');
-                    _this2.fetchArticles();
+                    _this3.fetchArticles();
                 }).catch(function (err) {
                     return console.log();
                 });
